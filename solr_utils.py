@@ -31,6 +31,8 @@ class SolrUtils:
       return [hit for hit in response.results]
 
     response = self.solr_conn.query(term, rows=batch_size)
+    if isinstance(num_returns, str) and num_returns.lower() == 'all':
+      num_returns = response.numFound
     while (response and num_returns > batch_size):
       query_results.extend([hit for hit in response.results])
       response = response.next_batch()
@@ -67,4 +69,8 @@ class TestAll():
     nt.assert_equal(len(returns), 25)
     returns = solr_utils.simple_query('chemical', 20)
     nt.assert_equal(len(returns), 20)
+    returns = solr_utils.simple_query('chemical')
+    nt.assert_equal(len(returns), 20)
+    returns = solr_utils.simple_query('chemical', 'all')
+    nt.assert_equal(len(returns), 37)
 
