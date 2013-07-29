@@ -1,0 +1,4 @@
+# you'll need to fill-in the following fields and
+# rename this file to solr_settings
+
+host: "http://localhost:8983/solr"
