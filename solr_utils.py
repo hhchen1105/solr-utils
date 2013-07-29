@@ -44,7 +44,7 @@ class SolrUtils:
     for line in f:
       if not self.is_this_a_setting_line(line):
         continue
-      line = line.split('#')[0] # remove comments ad the end of the line
+      line = line.split('#')[0] # remove comments at the end of the line
       fields = line.strip().split(':')
       if len(fields) < 2:
         raise Exception("Wrong format in the solr setting file")
