@@ -6,7 +6,7 @@ This is a wrapper of solrpy package.  We assume solrpy package is installed.
 
 # Hung-Hsuan Chen <hhchen@psu.edu>
 # Creation Date : 08-07-2013
-# Last Modified: Wed 07 Aug 2013 11:02:34 PM EDT
+# Last Modified: Wed 07 Aug 2013 11:03:19 PM EDT
 
 import solr
 
@@ -17,7 +17,7 @@ class SolrUtils:
   def __init__(self):
     self.__init_solr_connection()
 
-  def is_this_a_setting_line(self, line):
+  def __is_this_a_setting_line(self, line):
     line = line.strip()
     if line == '':
       return False
@@ -50,7 +50,7 @@ class SolrUtils:
     solr_info = { }
     f = open('./solr_settings', 'r')
     for line in f:
-      if not self.is_this_a_setting_line(line):
+      if not self.__is_this_a_setting_line(line):
         continue
       line = line.split('#')[0] # remove comments at the end of the line
       fields = line.strip().split(':')
