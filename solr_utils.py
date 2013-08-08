@@ -1,6 +1,12 @@
+#!/usr/bin/env python
+
 '''
-Assumign solrpy is installed
+This is a wrapper of solrpy package.  We assume solrpy package is installed.
 '''
+
+# Hung-Hsuan Chen <hhchen@psu.edu>
+# Creation Date : 08-07-2013
+# Last Modified: Wed 07 Aug 2013 11:02:34 PM EDT
 
 import solr
 
