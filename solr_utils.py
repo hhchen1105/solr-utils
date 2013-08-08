@@ -6,13 +6,13 @@ This is a wrapper of solrpy package.  We assume solrpy package is installed.
 
 # Hung-Hsuan Chen <hhchen@psu.edu>
 # Creation Date : 08-07-2013
-# Last Modified: Wed 07 Aug 2013 11:03:19 PM EDT
+# Last Modified: Wed 07 Aug 2013 11:07:23 PM EDT
 
 import solr
 
 class SolrUtils:
-  solr_info = { }
-  solr_conn = None
+  _solr_info = { }
+  _solr_conn = None
 
   def __init__(self):
     self.__init_solr_connection()
@@ -26,17 +26,17 @@ class SolrUtils:
     return True
 
   def __init_solr_connection(self):
-    self.solr_info = self.__get_solr_info()
-    self.solr_conn = solr.SolrConnection(self.solr_info['host'])
+    self._solr_info = self.__get_solr_info()
+    self._solr_conn = solr.SolrConnection(self._solr_info['host'])
 
   def simple_query(self, term, num_returns=20):
     batch_size = 20
     query_results = [ ]
     if num_returns <= batch_size:
-      response = self.solr_conn.query(term, rows=num_returns)
+      response = self._solr_conn.query(term, rows=num_returns)
       return [hit for hit in response.results]
 
-    response = self.solr_conn.query(term, rows=batch_size)
+    response = self._solr_conn.query(term, rows=batch_size)
     if isinstance(num_returns, str) and num_returns.lower() == 'all':
       num_returns = response.numFound
     while (response and num_returns > batch_size):
