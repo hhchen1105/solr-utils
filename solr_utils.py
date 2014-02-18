@@ -6,7 +6,7 @@ This is a wrapper of solrpy package.  We assume solrpy package is installed.
 
 # Hung-Hsuan Chen <hhchen@psu.edu>
 # Creation Date : 08-07-2013
-# Last Modified: Wed 07 Aug 2013 11:07:23 PM EDT
+# Last Modified: Tue 18 Feb 2014 03:47:36 PM EST
 
 import solr
 
@@ -29,14 +29,14 @@ class SolrUtils:
     self._solr_info = self.__get_solr_info()
     self._solr_conn = solr.SolrConnection(self._solr_info['host'])
 
-  def simple_query(self, term, num_returns=20):
+  def simple_query(self, term, num_returns=20, **args):
     batch_size = 20
     query_results = [ ]
     if num_returns <= batch_size:
-      response = self._solr_conn.query(term, rows=num_returns)
+      response = self._solr_conn.query(term, rows=num_returns, **args)
       return [hit for hit in response.results]
 
-    response = self._solr_conn.query(term, rows=batch_size)
+    response = self._solr_conn.query(term, rows=batch_size, **args)
     if isinstance(num_returns, str) and num_returns.lower() == 'all':
       num_returns = response.numFound
     while (response and num_returns > batch_size):
